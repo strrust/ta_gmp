@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import static com.codeborne.selenide.Configuration.*;
-import static com.codeborne.selenide.Configuration.remote;
 
 @Slf4j
 @Configuration
@@ -33,9 +32,11 @@ public class SelenideConfiguration {
 
     @PostConstruct
     public void configure() {
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setCapability("enableVNC", true);
         chromeOptions.addArguments("--ignore-certificate-errors");
+        chromeOptions.addArguments("--remote-allow-origins=*");
         browserCapabilities = chromeOptions;
         browser = "chrome";
         baseUrl = appBaseUri;
