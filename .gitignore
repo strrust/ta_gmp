@@ -1,0 +1,11 @@
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+/target/
+/build/
+.allure
+allure-results
+**/test-output/*/*
+**/target
