@@ -4,6 +4,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.LogConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class RequestSpecificationFactory {
     @Value("${AUTH_TOKEN}")
     private String authToken;
 
-    private RequestSpecBuilder getSpecificationBuilder() {
+    private RequestSpecBuilder getCommonSpecificationBuilder() {
         return new RequestSpecBuilder()
                 .addHeader("Authorization", String.format("Bearer %s", authToken))
                 .setConfig(RestAssuredConfig.config().logConfig(LogConfig.logConfig().blacklistHeader("Authorization")))
@@ -26,5 +27,10 @@ public class RequestSpecificationFactory {
                 .setBasePath(basePath)
                 .log(ALL)
                 .setContentType(ContentType.JSON);
+    }
+
+    public RequestSpecification getRequestSpecification() {
+        return getCommonSpecificationBuilder()
+                .build();
     }
 }
