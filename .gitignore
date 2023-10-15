@@ -4,9 +4,10 @@
 *.ipr
 /out/
 /target/
-/build/
-.allure
-allure-results
-**/test-output/*/*
 **/target
+/build/
+**/build
+allure-results
+.allure
+**/test-output/*/*
 local.properties

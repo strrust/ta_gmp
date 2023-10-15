@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 @Component
 public class DashboardsPage implements WebPage {
     public static final String URL = "/ui/#default_personal/dashboard";
+
     public SelenideElement title = $("span[title='All Dashboards']");
 
     @Override
