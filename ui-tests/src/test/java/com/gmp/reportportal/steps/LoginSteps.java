@@ -13,7 +13,7 @@ public class LoginSteps {
     @Autowired
     private User testUser;
 
-    @Step("Login as RP default user")
+    @Step("Login as ReportPortal default user")
     public void login() {
         loginPage.openPage();
         loginPage.login(testUser);
