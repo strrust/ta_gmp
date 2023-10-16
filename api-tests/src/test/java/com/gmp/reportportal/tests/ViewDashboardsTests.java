@@ -16,7 +16,7 @@ public class ViewDashboardsTests extends AbstractTestContextTests {
                 .describedAs("Only one dashboard should be presented")
                 .hasSize(1);
         assertThat(dashboardsTable.pickContent())
-                .describedAs("Only one dashboard should be presented")
+                .describedAs("Dashboard name should be '%s'", DASHBOARD_DEMO_NAME)
                 .extracting(Dashboard::getName)
                 .containsExactly(DASHBOARD_DEMO_NAME);
     }
