@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 @ContextConfiguration(classes = {TestContextConfiguration.class})
-public class AbstractTestContextTests extends AbstractTestNGSpringContextTests {
+public abstract class AbstractTestContextTests extends AbstractTestNGSpringContextTests {
     @Autowired
     protected LoginSteps loginSteps;
     @Autowired
