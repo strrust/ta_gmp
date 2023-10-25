@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class DashboardsTable {
     private static final String DEFAULT_PROJECT = "default_personal";
+    public static final String DASHBOARD_DEMO_NAME = "DEMO DASHBOARD";
 
     private DashboardsApi dashboardsApi;
 
@@ -22,10 +23,16 @@ public class DashboardsTable {
 
     @Step("I load dashboards table")
     public void loadDashboardsTable() {
-        dashboards = dashboardsApi.requestDashboards(DEFAULT_PROJECT);
+        DashboardsTableSettings settings = DashboardsTableSettings.builder().build();
+        dashboards = dashboardsApi.requestDashboards(DEFAULT_PROJECT, settings.pickQueryParams());
     }
 
     public List<Dashboard> pickContent() {
         return dashboards.getContent();
+    }
+
+    @Step("I filter designs by parameters: {settings}")
+    public void filterDesigns(DashboardsTableSettings settings) {
+        dashboards = dashboardsApi.requestDashboards(DEFAULT_PROJECT, settings.pickQueryParams());
     }
 }

@@ -8,6 +8,8 @@ import io.restassured.specification.RequestSpecification;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 import static io.restassured.filter.log.LogDetail.ALL;
 
 @Component
@@ -31,6 +33,12 @@ public class RequestSpecificationFactory {
 
     public RequestSpecification getRequestSpecification() {
         return getCommonSpecificationBuilder()
+                .build();
+    }
+
+    public RequestSpecification getRequestSpecification(Map<String, ?> requestQueryParameters) {
+        return getCommonSpecificationBuilder()
+                .addQueryParams(requestQueryParameters)
                 .build();
     }
 }
