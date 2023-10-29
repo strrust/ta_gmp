@@ -94,7 +94,7 @@ public class WidgetTestData {
             .widgetSize(new WidgetSize(6, 7))
             .build();
 
-    public static List<Object[]> widgets() {
+    public static List<Object[]> widget() {
         return Arrays.asList(
                 new Object[]{"Launch statistics chart", LAUNCH_STATISTICS_CHART_PARAMETERS, LAUNCH_STATISTICS_CHART},
                 new Object[]{"Launches duration chart", LAUNCHES_DURATION_CHART_PARAMETERS, LAUNCHES_DURATION_CHART},

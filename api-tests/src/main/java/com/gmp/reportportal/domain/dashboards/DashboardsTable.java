@@ -3,7 +3,9 @@ package com.gmp.reportportal.domain.dashboards;
 import com.gmp.reportportal.api.dashboards.DashboardsApi;
 import com.gmp.reportportal.api.dashboards.dto.common.widget.Widget;
 import com.gmp.reportportal.api.dashboards.dto.request.AddWidget;
+import com.gmp.reportportal.api.dashboards.dto.request.CreateDashboard;
 import com.gmp.reportportal.api.dashboards.dto.request.WidgetParameters;
+import com.gmp.reportportal.api.dashboards.dto.response.CreatedId;
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboard;
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboards;
 import com.gmp.reportportal.api.dashboards.dto.response.Message;
@@ -79,5 +81,14 @@ public class DashboardsTable {
 
     public int createWidget(WidgetParameters widgetParameters) {
         return dashboardsApi.createWidget(DEFAULT_PROJECT, widgetParameters);
+    }
+
+    @Step("I create dashboard with name {name} and description {description}")
+    public CreatedId createDashboard(String name, String description) {
+        CreateDashboard createDashboard = CreateDashboard.builder()
+                .name(name)
+                .description(description)
+                .build();
+        return dashboardsApi.createDashboard(DEFAULT_PROJECT, createDashboard);
     }
 }

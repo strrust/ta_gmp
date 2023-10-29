@@ -2,7 +2,9 @@ package com.gmp.reportportal.api.dashboards;
 
 import com.gmp.reportportal.api.RequestSpecificationFactory;
 import com.gmp.reportportal.api.dashboards.dto.request.AddWidget;
+import com.gmp.reportportal.api.dashboards.dto.request.CreateDashboard;
 import com.gmp.reportportal.api.dashboards.dto.request.WidgetParameters;
+import com.gmp.reportportal.api.dashboards.dto.response.CreatedId;
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboard;
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboards;
 import com.gmp.reportportal.api.dashboards.dto.response.Message;
@@ -66,5 +68,13 @@ public class DashboardsApi {
                 .post(CREATE_WIDGET, projectName).prettyPeek()
                 .then().assertThat().statusCode(SC_CREATED)
                 .extract().path("id");
+    }
+
+    public CreatedId createDashboard(String projectName, CreateDashboard createDashboard) {
+        return RestAssured
+                .given(requestConfigFactory.getRequestSpecification())
+                .body(createDashboard)
+                .post(DASHBOARDS, projectName).prettyPeek()
+                .then().extract().as(CreatedId.class);
     }
 }

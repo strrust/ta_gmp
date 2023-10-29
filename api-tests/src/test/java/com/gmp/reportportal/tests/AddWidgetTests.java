@@ -22,7 +22,7 @@ public class AddWidgetTests extends AbstractTestContextTests {
     }
 
     @ParameterizedTest
-    @MethodSource("com.gmp.reportportal.testdataproviders.WidgetTestData#widgets")
+    @MethodSource("com.gmp.reportportal.testdataproviders.WidgetTestData#widget")
     public void addWidgetToDashboard(String widgetDescription, WidgetParameters widgetParameters, Widget widget) {
         int widgetId = dashboardsTable.createWidget(widgetParameters);
         widget.setWidgetId(widgetId);
