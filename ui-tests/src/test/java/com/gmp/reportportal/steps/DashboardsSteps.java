@@ -14,4 +14,14 @@ public class DashboardsSteps {
     public void dashboardsTableShouldBeLoaded() {
         dashboardsPage.shouldBeLoaded();
     }
+
+    @Step("I filter designs by {text}")
+    public void filterDesigns(String text) {
+        dashboardsPage.filterDesigns(text);
+    }
+
+    @Step("Dashboard with name should be presented in filter results")
+    public void dashboardWithNameShouldBeInFilterResults(String dashboardName) {
+        dashboardsPage.dashboardShouldBePresented(dashboardName);
+    }
 }

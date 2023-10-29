@@ -12,9 +12,9 @@ public class DashboardsFilterTests extends AbstractTestContextTests {
 
     @ParameterizedTest
     @MethodSource("com.gmp.reportportal.testdataproviders.DashboardsFilterTestData#dashboardFilterCriteria")
-    public void searchDashboards(String criteriaDescription, String searchParameter) {
+    public void filterDashboards(String criteriaDescription, String filterParameter) {
         DashboardsTableSettings settings = DashboardsTableSettings.builder()
-                .filter(searchParameter)
+                .filter(filterParameter)
                 .build();
         dashboardsTable.filterDesigns(settings);
 
