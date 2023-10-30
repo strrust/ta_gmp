@@ -1,9 +1,8 @@
 package com.gmp.reportportal.configuration;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.beans.factory.config.CustomScopeConfigurer;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.SimpleThreadScope;
 
 @Configuration
 @ComponentScan({"com.gmp.reportportal"})
@@ -11,4 +10,11 @@ import org.springframework.context.annotation.PropertySources;
         @PropertySource("classpath:env/${TA_ENV:local}.properties")
 })
 public class TestContextConfiguration {
+
+    @Bean
+    public static CustomScopeConfigurer threadLocalScopeRegistration() {
+        CustomScopeConfigurer scopeConfigurator = new CustomScopeConfigurer();
+        scopeConfigurator.addScope("threadlocal", new SimpleThreadScope());
+        return scopeConfigurator;
+    }
 }

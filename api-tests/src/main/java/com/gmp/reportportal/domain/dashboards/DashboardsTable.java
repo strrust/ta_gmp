@@ -11,10 +11,13 @@ import com.gmp.reportportal.api.dashboards.dto.response.Dashboards;
 import com.gmp.reportportal.api.dashboards.dto.response.Message;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Scope(value = "threadlocal", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service
 public class DashboardsTable {
     private static final String DEFAULT_PROJECT = "default_personal";
