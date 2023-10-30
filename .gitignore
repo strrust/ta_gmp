@@ -1,0 +1,13 @@
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+/target/
+**/target
+/build/
+**/build
+allure-results
+.allure
+**/test-output/*/*
+local.properties
