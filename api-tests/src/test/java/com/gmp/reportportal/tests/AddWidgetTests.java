@@ -28,10 +28,10 @@ public class AddWidgetTests extends AbstractTestContextTests {
         widget.setWidgetId(widgetId);
         Message message = dashboardsTable.addWidgetToDashboard(widget);
 
-        String expectedMessagePattern = String.format(MESSAGE_TEMPLATE, widgetId, dashboardsTable.getOpenedDashboard().getId());
+        String expectedMessage = String.format(MESSAGE_TEMPLATE, widgetId, dashboardsTable.getOpenedDashboard().getId());
         assertThat(message.getMessage())
-                .describedAs("Message after adding '%s' should match pattern '%s'", widgetDescription, expectedMessagePattern)
-                .containsPattern(expectedMessagePattern);
+                .describedAs("Message after adding '%s' should be '%s'", widgetDescription, expectedMessage)
+                .isEqualTo(expectedMessage);
 
         dashboardsTable.openDashboard(DASHBOARD_DEMO_NAME);
 
