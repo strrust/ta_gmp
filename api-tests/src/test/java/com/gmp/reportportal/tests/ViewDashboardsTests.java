@@ -1,12 +1,12 @@
 package com.gmp.reportportal.tests;
 
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboard;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
+import static com.gmp.reportportal.domain.dashboards.DashboardsTable.DASHBOARD_DEMO_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewDashboardsTests extends AbstractTestContextTests {
-    private static final String DASHBOARD_DEMO_NAME = "DEMO DASHBOARD";
 
     @Test
     public void viewDashboards() {

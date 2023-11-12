@@ -1,8 +1,13 @@
-package com.gmp.reportportal.api.dashboards.dto.response.widget;
+package com.gmp.reportportal.api.dashboards.dto.common.widget;
 
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Widget {
     private String widgetName;
     private Integer widgetId;

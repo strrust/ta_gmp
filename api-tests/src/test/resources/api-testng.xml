@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-
-<suite name="ReportPortal API tests" verbose="5">
-    <test name="API tests">
-        <packages>
-            <package name="com.gmp.reportportal.tests.*"/>
-        </packages>
-    </test>
-</suite>
