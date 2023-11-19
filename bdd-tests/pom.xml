@@ -16,6 +16,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.gmp.reportportal</groupId>
+            <artifactId>api-tests</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
