@@ -1,6 +1,6 @@
 ##
 # This is a template of settings that specifies TAF settings.
-# Before running Maven or TestNG test runners, create new file local.properties
+# Before running Maven or JUnit test runners, create new file local.properties
 # based on this template and put it next to the same folder with template.
 # Then, setup environment variable AUTH_TOKEN={RP_API_TOKEN}
 ##

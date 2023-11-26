@@ -7,7 +7,7 @@ This repository contains homework tasks for TA GMP.
 
 * Apache Maven.
 
-## How to launch API tests
+## How to launch tests
 
 * Clone the project to your local machine
 
@@ -22,3 +22,7 @@ This repository contains homework tasks for TA GMP.
 * To run ui-tests, use command:
 
 > mvn clean test -pl ui-tests -DTA_ENV=local -DlogLevel=INFO
+
+* To run cucumber-tests, use command:
+
+> mvn clean test -pl bdd-tests -DTA_ENV=local -DlogLevel=INFO

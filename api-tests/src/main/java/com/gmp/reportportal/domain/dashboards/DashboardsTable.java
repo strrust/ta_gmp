@@ -28,6 +28,7 @@ public class DashboardsTable {
     private Dashboards dashboards;
     @Getter
     private Dashboard openedDashboard;
+    private CreatedId createdDashboardId;
 
     public DashboardsTable(DashboardsApi dashboardsApi) {
         this.dashboardsApi = dashboardsApi;
@@ -87,11 +88,15 @@ public class DashboardsTable {
     }
 
     @Step("I create dashboard with name {name} and description {description}")
-    public CreatedId createDashboard(String name, String description) {
+    public void createDashboard(String name, String description) {
         CreateDashboard createDashboard = CreateDashboard.builder()
                 .name(name)
                 .description(description)
                 .build();
-        return dashboardsApi.createDashboard(DEFAULT_PROJECT, createDashboard);
+        createdDashboardId = dashboardsApi.createDashboard(DEFAULT_PROJECT, createDashboard);
+    }
+
+    public Message pickErrorMessage() {
+        return createdDashboardId;
     }
 }
