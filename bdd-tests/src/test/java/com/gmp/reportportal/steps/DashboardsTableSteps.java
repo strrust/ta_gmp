@@ -1,5 +1,7 @@
 package com.gmp.reportportal.steps;
 
+import com.gmp.reportportal.api.dashboards.dto.common.widget.Widget;
+import com.gmp.reportportal.api.dashboards.dto.request.WidgetParameters;
 import com.gmp.reportportal.api.dashboards.dto.response.Dashboard;
 import com.gmp.reportportal.api.dashboards.dto.response.Message;
 import com.gmp.reportportal.domain.dashboards.DashboardsTableSettings;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Map;
 
 import static com.gmp.reportportal.domain.dashboards.DashboardsTable.DASHBOARD_DEMO_NAME;
+import static com.gmp.reportportal.testdata.WidgetTestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DashboardsTableSteps {
@@ -23,6 +26,16 @@ public class DashboardsTableSteps {
             Map.entry("emptyName", new Message(EMPTY_NAME_ERROR_MESSAGE, 4001)),
             Map.entry("nameWithIncorrectSize", new Message(INCORRECT_NAME_ERROR_MESSAGE, 4001)),
             Map.entry("existedName", new Message(EXISTED_NAME_ERROR_MESSAGE, 4091))
+    );
+    private static final Map<String, WidgetParameters> WIDGET_DEFAULT_PARAMETERS = Map.ofEntries(
+            Map.entry("activityStream", ACTIVITY_STREAM_CHART_PARAMETERS),
+            Map.entry("launchesTable", LAUNCHES_TABLE_CHART_PARAMETERS),
+            Map.entry("overallStatistics", OVERALL_STATISTICS_CHART_PARAMETERS)
+    );
+    private static final Map<String, Widget> WIDGETS = Map.ofEntries(
+            Map.entry("activityStream", ACTIVITY_STREAM_CHART),
+            Map.entry("launchesTable", LAUNCHES_TABLE_CHART),
+            Map.entry("overallStatistics", OVERALL_STATISTICS_CHART)
     );
 
     @When("I load dashboards")
@@ -80,5 +93,25 @@ public class DashboardsTableSteps {
         assertThat(actualErrorMessage.getErrorCode())
                 .describedAs("Dashboard creation error code should be '%s'", expectedErrorMessage.getErrorCode())
                 .isEqualTo(expectedErrorMessage.getErrorCode());
+    }
+
+    @When("I add widget {string} with default parameters")
+    public void addWidget(String widgetType) {
+        WidgetParameters widgetParameters = WIDGET_DEFAULT_PARAMETERS.get(widgetType);
+        scenarioContext.dashboardsTable.createWidget(widgetParameters);
+        int widgetId = scenarioContext.dashboardsTable.getLastCreatedWidgetId();
+        Widget widget = WIDGETS.get(widgetType);
+        widget.setWidgetId(widgetId);
+        scenarioContext.dashboardsTable.addWidgetToDashboard(widget);
+    }
+
+    @Then("Dashboard contains created widget {string} with correct parameters")
+    public void dashboardContainsWidget(String widgetType) {
+        Widget actualWidget = scenarioContext.dashboardsTable.pickOpenedDashboardLastCreatedWidget();
+        Widget expectedWidget = WIDGETS.get(widgetType);
+        assertThat(actualWidget)
+                .describedAs("Added widget should be correct")
+                .usingRecursiveComparison()
+                .isEqualTo(expectedWidget);
     }
 }

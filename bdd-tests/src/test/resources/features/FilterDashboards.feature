@@ -1,3 +1,4 @@
+@filter
 Feature: Filter ReportPortal dashboards
   User should be able to filter report portal dashboards
 
