@@ -11,7 +11,8 @@ public class CreateDashboardValidationTests extends AbstractTestContextTests {
     @ParameterizedTest
     @MethodSource("com.gmp.reportportal.testdataproviders.DashboardsCreationTestData#dashboardCreationNegativeCriteria")
     public void attemptCreateDashboard(String dashboardName, String dashboardDescription, String errorMessage, int errorCode) {
-        Message message = dashboardsTable.createDashboard(dashboardName, dashboardDescription);
+        dashboardsTable.createDashboard(dashboardName, dashboardDescription);
+        Message message = dashboardsTable.pickErrorMessage();
 
         assertThat(message.getMessage())
                 .describedAs("Error message should be '%s'", errorMessage)

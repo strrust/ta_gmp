@@ -1,6 +1,5 @@
 package com.gmp.reportportal.configuration;
 
-import com.codeborne.selenide.Selenide;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,9 +26,6 @@ public class SelenideConfiguration {
     @Value("${polling.interval:200}")
     protected int browserPollingInterval;
 
-    @Value("${selenoid.url}")
-    protected String selenoidUrl;
-
     @PostConstruct
     public void configure() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver/chromedriver.exe");
@@ -45,11 +41,7 @@ public class SelenideConfiguration {
         pollingInterval = browserPollingInterval;
         screenshots = false;
         savePageSource = false;
-        browserVersion = browserVersion != null ? browserVersion : version;
-        if (remote != null || !selenoidUrl.isBlank()) {
-            remote = remote != null ? remote : selenoidUrl;
-            Selenide.open();
-        }
-        log.info("Starting chrome browser with version: {}, address: {}", browserVersion, remote != null ? remote : "locally");
+        browserVersion = version;
+        log.info("Starting chrome browser with version: {}, address: {}", browserVersion, "locally");
     }
 }

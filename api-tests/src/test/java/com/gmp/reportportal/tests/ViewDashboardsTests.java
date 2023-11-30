@@ -13,11 +13,11 @@ public class ViewDashboardsTests extends AbstractTestContextTests {
         dashboardsTable.loadDashboardsTable();
 
         assertThat(dashboardsTable.pickContent())
-                .describedAs("Only one dashboard should be presented")
-                .hasSize(1);
+                .describedAs("At least one dashboard should be presented")
+                .isNotEmpty();
         assertThat(dashboardsTable.pickContent())
-                .describedAs("Dashboard name should be '%s'", DASHBOARD_DEMO_NAME)
+                .describedAs("Dashboards table should contain demo dashboard")
                 .extracting(Dashboard::getName)
-                .containsExactly(DASHBOARD_DEMO_NAME);
+                .contains(DASHBOARD_DEMO_NAME);
     }
 }

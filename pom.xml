@@ -11,6 +11,7 @@
     <modules>
         <module>api-tests</module>
         <module>ui-tests</module>
+        <module>bdd-tests</module>
     </modules>
 
     <properties>

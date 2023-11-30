@@ -77,4 +77,12 @@ public class DashboardsApi {
                 .post(DASHBOARDS, projectName).prettyPeek()
                 .then().extract().as(CreatedId.class);
     }
+
+    public Message removeDashboard(String projectName, int dashboardId) {
+        return RestAssured
+                .given(requestConfigFactory.getRequestSpecification())
+                .delete(DASHBOARD, projectName, dashboardId).prettyPeek()
+                .then().assertThat().statusCode(SC_OK)
+                .extract().as(Message.class);
+    }
 }

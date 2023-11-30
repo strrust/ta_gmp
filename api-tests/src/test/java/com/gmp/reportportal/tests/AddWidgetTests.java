@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddWidgetTests extends AbstractTestContextTests {
     private static final String MESSAGE_TEMPLATE = "Widget with ID = '%s' was successfully added to the dashboard with ID = '%s'";
-    private Widget addedWidget;
 
     @BeforeEach
     public void openDemoDashboard() {
@@ -24,7 +23,8 @@ public class AddWidgetTests extends AbstractTestContextTests {
     @ParameterizedTest
     @MethodSource("com.gmp.reportportal.testdataproviders.WidgetTestData#widget")
     public void addWidgetToDashboard(String widgetDescription, WidgetParameters widgetParameters, Widget widget) {
-        int widgetId = dashboardsTable.createWidget(widgetParameters);
+        dashboardsTable.createWidget(widgetParameters);
+        int widgetId = dashboardsTable.getLastCreatedWidgetId();
         widget.setWidgetId(widgetId);
         Message message = dashboardsTable.addWidgetToDashboard(widget);
 
@@ -35,7 +35,7 @@ public class AddWidgetTests extends AbstractTestContextTests {
 
         dashboardsTable.openDashboard(DASHBOARD_DEMO_NAME);
 
-        addedWidget = dashboardsTable.pickOpenedDashboardWidgetByName(widget.getWidgetName());
+        Widget addedWidget = dashboardsTable.pickOpenedDashboardWidgetByName(widget.getWidgetName());
         assertThat(addedWidget)
                 .describedAs("Dashboard should contain '%s' widget", widgetDescription)
                 .usingRecursiveComparison()
@@ -44,6 +44,6 @@ public class AddWidgetTests extends AbstractTestContextTests {
 
     @AfterEach
     public void removeWidget() {
-        dashboardsTable.removeWidgetFromDashboard(addedWidget.getWidgetId());
+        dashboardsTable.removeLastCreatedWidgetFromDashboard();
     }
 }

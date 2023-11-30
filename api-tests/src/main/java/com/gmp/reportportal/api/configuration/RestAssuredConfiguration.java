@@ -14,7 +14,7 @@ import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 @Slf4j
 @Component
 public class RestAssuredConfiguration {
-    @Value("${connection.timeout.millisec}")
+    @Value("${connection.timeout.millisec:60000}")
     private int timeout;
 
     @PostConstruct
