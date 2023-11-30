@@ -8,7 +8,7 @@ Feature: Create report portal dashboard
     When I create dashboard with name <name> and description <description>
     Then User receives dashboard creation error with message <messageType>
     And I load dashboards
-    And Dashboards table contains only demo dashboard
+    And Dashboards table contains one demo dashboard
 
     Examples:
       | name             | description | messageType             |

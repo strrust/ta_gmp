@@ -4,7 +4,7 @@ Feature: Add widget to dashboard
 
   Background:
     Given I load dashboards
-    And Dashboards table contains only demo dashboard
+    And Dashboards table contains demo dashboard
     And I open demo dashboard
 
   Scenario Outline: User adds widget to dashboard

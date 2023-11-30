@@ -2,14 +2,11 @@ package com.gmp.reportportal.configuration;
 
 import com.gmp.reportportal.domain.dashboards.DashboardsTable;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.CucumberContextConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Slf4j
 @CucumberContextConfiguration
@@ -25,17 +22,6 @@ public class CucumberHooks {
     @After("@widget")
     public void removeLastCreatedWidget() {
         dashboardsTable.removeLastCreatedWidgetFromDashboard();
-    }
-
-    @Before("@filter")
-    public void createAdditionalDesignBeforeFiltering() {
-        dashboardsTable.createDashboard("ta-db-1", EMPTY);
-    }
-
-    @After("@filter")
-    public void removeAdditionalDesignAfterFiltering() {
-        dashboardsTable.loadDashboardsTable();
-        dashboardsTable.removeDashboard("ta-db-1");
     }
 
     @After

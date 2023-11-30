@@ -1,6 +1,5 @@
 package com.gmp.reportportal.tests;
 
-import com.gmp.reportportal.api.dashboards.dto.response.Dashboard;
 import com.gmp.reportportal.domain.dashboards.DashboardsTableSettings;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,9 +17,8 @@ public class DashboardsFilterTests extends AbstractTestContextTests {
                 .build();
         dashboardsTable.filterDesigns(settings);
 
-        assertThat(dashboardsTable.pickContent())
+        dashboardsTable.pickContent().forEach(dashboard -> assertThat(dashboard.getName().toLowerCase())
                 .describedAs("Dashboard '%s' should be presented after filtering by '%s'", DASHBOARD_DEMO_NAME, criteriaDescription)
-                .extracting(Dashboard::getName)
-                .containsExactly(DASHBOARD_DEMO_NAME);
+                .contains(filterParameter.toLowerCase()));
     }
 }

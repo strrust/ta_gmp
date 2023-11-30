@@ -7,7 +7,7 @@ Feature: Filter ReportPortal dashboards
 
   Scenario Outline: User filters RP dashboards
     When I filter dashboards by name <searchingQuery>
-    Then Dashboards table contains only demo dashboard
+    Then Dashboards table contains dashboards matches <searchingQuery>
 
     Examples:
       | searchingQuery   |

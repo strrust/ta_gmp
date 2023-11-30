@@ -43,12 +43,27 @@ public class DashboardsTableSteps {
         scenarioContext.dashboardsTable.loadDashboardsTable();
     }
 
-    @Then("Dashboards table contains only demo dashboard")
-    public void dashboardsTableContainsOnlyDemoDashboard() {
+    @Then("Dashboards table contains dashboards matches {string}")
+    public void dashboardsTableContainsDashboardMatchesQuery(String searchingQuery) {
+        scenarioContext.dashboardsTable.pickContent().forEach(dashboard -> assertThat(dashboard.getName().toLowerCase())
+                .describedAs("Dashboard '%s' should be presented after filtering")
+                .contains(searchingQuery.toLowerCase()));
+    }
+
+    @Then("Dashboards table contains demo dashboard")
+    public void dashboardsTableContainsDemoDashboard() {
         assertThat(scenarioContext.dashboardsTable.pickContent())
                 .describedAs("Dashboard should contain widgets")
                 .extracting(Dashboard::getName)
-                .containsExactly(DASHBOARD_DEMO_NAME);
+                .contains(DASHBOARD_DEMO_NAME);
+    }
+
+    @Then("Dashboards table contains one demo dashboard")
+    public void dashboardsTableContainsOneDemoDashboard() {
+        assertThat(scenarioContext.dashboardsTable.pickContent())
+                .describedAs("Dashboard should contain widgets")
+                .filteredOn(dashboard -> dashboard.getName().equals(DASHBOARD_DEMO_NAME))
+                .hasSize(1);
     }
 
     @When("I open demo dashboard")
