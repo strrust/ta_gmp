@@ -23,5 +23,5 @@ This repository contains homework tasks for TA GMP.
 
 > mvn clean test -pl ui-tests -DTA_ENV=local -DlogLevel=INFO
 
-* To run cucumber-tests, use test runner classes *bdd-tests/src/test/java/com/gmp/reportportal/TestRunner.java* or *
-  TestRunnerParallel.java*
+* To run cucumber-tests, use test runner classes *bdd-tests/src/test/java/com/gmp/reportportal/TestRunner.java* or
+  *TestRunnerParallel.java*
